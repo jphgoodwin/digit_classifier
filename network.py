@@ -203,14 +203,14 @@ def sigmoid_prime(z):
 def length(i):
     return sum(1 for e in i)
 
-net = Network([2, 3, 1])
-
-print('input sizes')
-print(net.sizes[:])
-print('biases')
-print(net.biases[:])
-print('weights')
-print(net.weights[:])
+# net = Network([2, 3, 1])
+# 
+# print('input sizes')
+# print(net.sizes[:])
+# print('biases')
+# print(net.biases[:])
+# print('weights')
+# print(net.weights[:])
 
 # net2 = Network([2, 3, 3, 1])
 # 
@@ -218,10 +218,10 @@ print(net.weights[:])
 # print(net2.biases[:])
 # print(net2.weights[:])
 
-adata = np.array([2, 3]).reshape((2, 1))
-print(adata.shape)
-print(adata)
-print(net.feedforward(adata))
+# adata = np.array([2, 3]).reshape((2, 1))
+# print(adata.shape)
+# print(adata)
+# print(net.feedforward(adata))
 
 training_data, validation_data, test_data = mnist_loader.load_data()
 net = Network([784, 30, 30, 10])
