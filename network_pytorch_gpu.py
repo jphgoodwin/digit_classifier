@@ -54,9 +54,9 @@ def run(net, training_data, epochs, mini_batch_size, lr, test_data=None):
                 # Convert numpy arrays into torch tensors and reshape them so they are 1D
                 # ie remove second dimension in (784, 1) and (10, 1).
                 x_tensor = torch.from_numpy(x)
-                x_tensor = x_tensor.reshape(x_tensor.size()[0])
+                x_tensor = x_tensor.reshape(x_tensor.size()[0]).to(device)
                 y_tensor = torch.from_numpy(y)
-                y_tensor = y_tensor.reshape(y_tensor.size()[0])
+                y_tensor = y_tensor.reshape(y_tensor.size()[0]).to(device)
                 # Add tensors to the list.
                 X.append(x_tensor)
                 Y.append(y_tensor)
@@ -88,7 +88,7 @@ def run(net, training_data, epochs, mini_batch_size, lr, test_data=None):
         # Evaluate network on test_data.
         if test_data:
             with torch.no_grad():
-                test_results = [(torch.argmax(net(torch.from_numpy(x).transpose(0,1))).item(), y) for (x, y) in test_data]
+                test_results = [(torch.argmax(net(torch.from_numpy(x).transpose(0,1).to(device))).item(), y) for (x, y) in test_data]
                 num_correct = sum(int(x == y) for (x, y) in test_results)
                 print("Epoch {}".format(j))
                 print("Test result sample: \n{0}".format(test_results[0:10]))
@@ -98,7 +98,7 @@ def run(net, training_data, epochs, mini_batch_size, lr, test_data=None):
 training_data, validation_data, test_data = mnist_loader.load_data()
 
 # Create network instance.
-net = Network(784, 30, 30, 10)
+net = Network(784, 100, 100, 10)
 
 # Move network onto GPU.
 net = net.to(device)
