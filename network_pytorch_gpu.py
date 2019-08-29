@@ -98,7 +98,10 @@ def run(net, training_data, epochs, mini_batch_size, lr, test_data=None):
 training_data, validation_data, test_data = mnist_loader.load_data()
 
 # Create network instance.
-net = Network(784, 30, 30, 10).to(device)
+net = Network(784, 30, 30, 10)
+
+# Move network onto GPU.
+net = net.to(device)
 
 # Train and test network.
 run(net, training_data, 50, 10, 0.003, test_data=test_data)
