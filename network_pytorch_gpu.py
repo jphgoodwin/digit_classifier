@@ -25,7 +25,7 @@ class Network(nn.Module):
     # Forward propagation function. The input is passed through each layer with a subsequent
     # sigmoid activation.
     def forward(self, x):
-        act_1 = torch.sigmoid(self.linear1(x.to(device)))
+        act_1 = torch.sigmoid(self.linear1(x))
         act_2 = torch.sigmoid(self.linear2(act_1))
         act_3 = torch.sigmoid(self.linear3(act_2))
         return act_3
@@ -98,7 +98,7 @@ def run(net, training_data, epochs, mini_batch_size, lr, test_data=None):
 training_data, validation_data, test_data = mnist_loader.load_data()
 
 # Create network instance.
-net = Network(784, 30, 30, 10)
+net = Network(784, 30, 30, 10).to(device)
 
 # Train and test network.
 run(net, training_data, 50, 10, 0.003, test_data=test_data)
